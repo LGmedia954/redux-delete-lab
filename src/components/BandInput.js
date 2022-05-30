@@ -1,36 +1,83 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class BandInput extends Component {
+
   state = {
-    name: ''
+    bandName: ''
   }
 
-  handleOnChange = (event) => {
+  handleOnChange(event) {
     this.setState({
-      name: event.target.value
-    })
+      bandName: event.target.value,
+    });
   }
 
-  handleOnSubmit = (event) => {
+  handleOnSubmit(event) {
     event.preventDefault();
-    this.props.addBand(this.state);
-    this.setState({ name: '' })
+    this.props.addBand(this.state.bandName);
+    this.setState({
+      bandName: '',
+    });
   }
 
   render() {
-    return(
+    return (
       <div>
-        <form onSubmit={this.handleOnSubmit}>
-          Enter a Band:
-          <input 
+        <form onSubmit={(event) => this.handleOnSubmit(event)}>
+          <input
             type="text"
-            onChange={this.handleOnChange}
-            value={this.state.name}
-            />
+            value={this.state.bandName}
+            onChange={(event) => this.handleOnChange(event)} />
+          <input type="submit" />
         </form>
       </div>
-    )
+    );
   }
-}
+};
 
 export default BandInput;
+
+
+
+
+
+// Alternative
+
+// import React, { Component } from 'react';
+
+// class BandInput extends Component {
+
+//   state = {
+//     bandName: ''
+//   }
+
+//   handleOnChange(event) {
+//     this.setState({
+//       bandName: event.target.value,
+//     });
+//   }
+
+//   handleOnSubmit(event) {
+//     event.preventDefault();
+//     this.props.dispatch({ type: "ADD_BAND", name: this.state.bandName })
+//     this.setState({
+//       bandName: ''
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <div>
+//         <form onSubmit={(event) => this.handleOnSubmit(event)}>
+//           <input
+//             type="text"
+//             value={this.state.bandName}
+//             onChange={(event) => this.handleOnChange(event)} />
+//           <input type="submit" />
+//         </form>
+//       </div>
+//     );
+//   }
+// };
+
+// export default BandInput;
